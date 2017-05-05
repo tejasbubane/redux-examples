@@ -1,5 +1,5 @@
-// Using the reducers we made to create a todolist application
-// Working Example: https://jsfiddle.net/tejasbubane/snv9tsx2/
+// Add functionality to toggle Todos
+// Working Example: https://jsfiddle.net/tejasbubane/w23xwtbx/
 
 const visibilityFilter = (state = "SHOW_ALL", action) => {
   switch(action.type) {
@@ -56,6 +56,26 @@ const { Component } = React;
 
 let nextTodoId = 0;
 class TodoApp extends Component {
+  toggleTodo(id) {
+    store.dispatch({
+      type: "TOGGLE_TODO",
+      id: id
+    });
+  }
+
+  renderTodos() {
+    return this.props.todos.map(todo => (
+      <li key={todo.id}
+          onClick={() => this.toggleTodo(todo.id)}
+          style={{
+            textDecoration: todo.completed ? 'line-through' : 'none',
+            cursor: 'pointer'
+          }}>
+        {todo.text}
+      </li>
+    ));
+  }
+
   render() {
     return(
       <div>
@@ -66,10 +86,11 @@ class TodoApp extends Component {
               text: this.node.value,
               id: nextTodoId++
             });
+            this.node.value = "";
           }}>Add Todo</button>
 
         <ul>
-          {this.props.todos.map(t => <li key={t.id}>{t.text}</li>)}
+          {this.renderTodos()}
         </ul>
       </div>
     );
