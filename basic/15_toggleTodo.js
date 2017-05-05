@@ -1,5 +1,5 @@
-// Add functionality to toggle Todos
-// Working Example: https://jsfiddle.net/tejasbubane/w23xwtbx/
+// Add todos filter
+// Working Example: https://jsfiddle.net/tejasbubane/qormgmeg/1/
 
 const visibilityFilter = (state = "SHOW_ALL", action) => {
   switch(action.type) {
@@ -54,6 +54,19 @@ const store = createStore(app);
 
 const { Component } = React;
 
+const FilterButton = (props) => {
+  if(props.currentFilter === props.visibility) return <span>{props.text}</span>;
+
+  return(
+    <button onClick={() => {
+        store.dispatch({
+          type: "SET_VISIBILITY",
+          visibility: props.visibility
+        });
+      }}>{props.text}</button>
+  );
+}
+
 let nextTodoId = 0;
 class TodoApp extends Component {
   toggleTodo(id) {
@@ -63,14 +76,28 @@ class TodoApp extends Component {
     });
   }
 
+  filteredTodos() {
+    let {todos, visibilityFilter} = this.props;
+    switch(visibilityFilter) {
+    case "COMPLETED":
+      return todos.filter(todo => todo.completed);
+    case "PENDING":
+      return todos.filter(todo => !todo.completed);
+    default:
+      return todos;
+    }
+  }
+
   renderTodos() {
-    return this.props.todos.map(todo => (
+    console.log(this.props.visibility);
+    console.log(this.filteredTodos());
+    return this.filteredTodos().map(todo => (
       <li key={todo.id}
           onClick={() => this.toggleTodo(todo.id)}
-          style={{
-            textDecoration: todo.completed ? 'line-through' : 'none',
-            cursor: 'pointer'
-          }}>
+        style={{
+          textDecoration: todo.completed ? 'line-through' : 'none',
+          cursor: 'pointer'
+        }}>
         {todo.text}
       </li>
     ));
@@ -80,18 +107,24 @@ class TodoApp extends Component {
     return(
       <div>
         <input ref={(node) => this.node = node}/>
-        <button onClick={() => {
-            store.dispatch({
-              type: "ADD_TODO",
-              text: this.node.value,
-              id: nextTodoId++
-            });
-            this.node.value = "";
-          }}>Add Todo</button>
+          <button onClick={() => {
+              store.dispatch({
+                type: "ADD_TODO",
+                text: this.node.value,
+                id: nextTodoId++
+              });
+              this.node.value = "";
+            }}>Add Todo</button>
 
-        <ul>
-          {this.renderTodos()}
-        </ul>
+          <ul>
+            {this.renderTodos()}
+          </ul>
+          <FilterButton visibility="SHOW_ALL" text="All"
+                        currentFilter={this.props.visibilityFilter}/>
+          <FilterButton visibility="COMPLETED" text="Completed"
+                        currentFilter={this.props.visibilityFilter}/>
+          <FilterButton visibility="PENDING" text="Pending"
+                        currentFilter={this.props.visibilityFilter}/>
       </div>
     );
   }
@@ -99,7 +132,7 @@ class TodoApp extends Component {
 
 const render = () => {
   ReactDOM.render(
-    <TodoApp todos={store.getState().todos}/>,
+    <TodoApp {...store.getState()}/>,
     document.getElementById("app")
   );
 };
