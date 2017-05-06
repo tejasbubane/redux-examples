@@ -4,7 +4,7 @@ import Todo from 'Todo';
 
 export default class TodoList extends React.Component {
   componentDidMount() {
-    this.unsubscribe = this.props.store.subscribe(() => {
+    this.unsubscribe = this.context.store.subscribe(() => {
       this.forceUpdate();
     });
   }
@@ -26,14 +26,14 @@ export default class TodoList extends React.Component {
 
   toggleTodo = (id) => {
     console.log(id);
-    this.props.store.dispatch({
+    this.context.store.dispatch({
       type: "TOGGLE_TODO",
       id: id
     });
   }
 
   render() {
-    let { todos, visibility } = this.props.store.getState();
+    let { todos, visibility } = this.context.store.getState();
 
     return(
       <ul>
@@ -45,4 +45,8 @@ export default class TodoList extends React.Component {
       </ul>
     );
   }
-}
+};
+
+TodoList.contextTypes = {
+  store: React.PropTypes.object
+};

@@ -4,7 +4,7 @@ import Link from 'Link';
 
 export default class FilterList extends React.Component {
   componentDidMount() {
-    this.unsubscribe = this.props.store.subscribe(() => this.forceUpdate());
+    this.unsubscribe = this.context.store.subscribe(() => this.forceUpdate());
   }
 
   componentWillUnmount() {
@@ -14,7 +14,7 @@ export default class FilterList extends React.Component {
   changeFilter = (filter, e) => {
     e.preventDefault();
 
-    this.props.store.dispatch({
+    this.context.store.dispatch({
       type: "SET_VISIBILITY",
       visibility: filter
     });
@@ -22,7 +22,7 @@ export default class FilterList extends React.Component {
   }
 
   render() {
-    let currentFilter = this.props.store.getState().visibility;
+    let currentFilter = this.context.store.getState().visibility;
 
     return (
       <div>
@@ -39,3 +39,7 @@ export default class FilterList extends React.Component {
     );
   }
 }
+
+FilterList.contextTypes = {
+  store: React.PropTypes.object
+};

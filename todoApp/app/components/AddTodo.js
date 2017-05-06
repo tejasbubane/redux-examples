@@ -5,7 +5,7 @@ export default class AddTodo extends React.Component {
 
   addTodo = (e) => {
     e.preventDefault();
-    this.props.store.dispatch({
+    this.context.store.dispatch({
       type: "ADD_TODO",
       id: this.todoCounter++,
       text: this.node.value
@@ -21,4 +21,7 @@ export default class AddTodo extends React.Component {
       </form>
     );
   }
+};
+AddTodo.contextTypes = {
+  store: React.PropTypes.object
 };
