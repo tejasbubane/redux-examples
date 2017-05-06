@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Todo from 'Todo';
+
 export default class TodoList extends React.Component {
   componentDidMount() {
     this.unsubscribe = this.props.store.subscribe(() => {
@@ -11,6 +13,14 @@ export default class TodoList extends React.Component {
     this.unsubscribe();
   }
 
+  toggleTodo = (id) => {
+    console.log(id);
+    this.props.store.dispatch({
+      type: "TOGGLE_TODO",
+      id: id
+    });
+  }
+
   render() {
     let todos = this.props.store.getState().todos;
 
@@ -18,7 +28,7 @@ export default class TodoList extends React.Component {
       <ul>
         {
           todos.map(todo => {
-            return <li key={todo.id}>{todo.text}</li>;
+            return <Todo key={todo.id} todo={todo} onClick={this.toggleTodo}/>;
           })
         }
       </ul>

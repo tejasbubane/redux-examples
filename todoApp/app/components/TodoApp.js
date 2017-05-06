@@ -13,7 +13,6 @@ const app = combineReducers({
   todos,
   visibility
 });
-
 const store = createStore(app);
 
 const TodoApp = () => (
