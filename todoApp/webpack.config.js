@@ -5,7 +5,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: './index.js',
+  entry: './app/index.js',
 
   devtool: 'source-map',
 
@@ -15,7 +15,7 @@ module.exports = {
   },
 
   resolve: {
-    modules: ["components", "node_modules"]
+    modules: ["app/components", "app/reducers", "node_modules"]
   },
 
   module: {

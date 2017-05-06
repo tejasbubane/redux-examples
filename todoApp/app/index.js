@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import TodoApp from 'app';
+import TodoApp from 'TodoApp';
 
 ReactDOM.render(
   <TodoApp />,
