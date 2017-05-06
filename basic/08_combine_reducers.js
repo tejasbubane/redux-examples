@@ -1,5 +1,8 @@
 // Simply combining reducers the previous two reducers ADD_TODO and TOGGLE_TODO
 // Working example: https://jsfiddle.net/tejasbubane/wehnv853/
+// Run this example from current directory: `node 08_combine_reducers.js`
+
+const expect = require('expect');
 
 const todos = (state = [], action) => {
   switch(action.type) {
@@ -15,10 +18,7 @@ const todos = (state = [], action) => {
     case "TOGGLE_TODO":
       return state.map(todo => {
         if(todo.id === action.id) {
-          return {
-            ...todo,
-            completed: !todo.completed
-          };
+          return Object.assign({}, todo, {completed: !todo.completed});
         }
 
         return todo;
@@ -26,7 +26,7 @@ const todos = (state = [], action) => {
     default:
       return state;
   }
-}
+};
 
 const testAddTodo = () => {
   let stateBefore = [],
@@ -75,7 +75,7 @@ const testToggleTodo = () => {
       text: "Get some butter",
       completed: true
     }
-  ]
+  ];
 
   Object.freeze(stateBefore);
   Object.freeze(stateAfter);

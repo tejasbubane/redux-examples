@@ -1,5 +1,8 @@
 // Reducer composition using arrays
 // Working example: https://jsfiddle.net/tejasbubane/xq79v4xh/
+// Run this example from current directory: `node 09_reducer_composition_1.js`
+
+const expect = require('expect');
 
 const todo = (state, action) => {
   // state here refers to a single todo
@@ -12,10 +15,7 @@ const todo = (state, action) => {
       };
     case "TOGGLE_TODO":
       if(state.id === action.id) {
-        return {
-          ...state,
-          completed: !state.completed
-        };
+        return Object.assign({}, state, {completed: !state.completed});
       }
       else {
         return state;

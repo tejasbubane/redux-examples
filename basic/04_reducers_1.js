@@ -1,27 +1,31 @@
 // Working Example: https://jsfiddle.net/tejasbubane/5y81tz9p/
+// Run this example from current directory: `node 04_reducers_1.js`
+
+const expect = require('expect');
+
 const addCounter = (counters) => {
   return [...counters, 0];
-}
+};
 const testAddCounter = () => {
   let listBefore = [],
       listAfter = [0];
 
   Object.freeze(listBefore);
-  expect(addCounter(listBefore, 1)).toEqual(listAfter);
-}
+  expect(addCounter(listBefore)).toEqual(listAfter);
+};
 
 const removeCounter = (counters, index) => {
   return [
     ...counters.slice(0, index),
     ...counters.slice(index + 1)
   ];
-}
+};
 const testRemoveCounter = () => {
   let listBefore = [1, 12, 4, 5],
       listAfter = [1, 12, 5];
   Object.freeze(listBefore);
   expect(removeCounter(listBefore, 2)).toEqual(listAfter);
-}
+};
 
 const incrementCounter = (counters, index) => {
   return [
@@ -29,16 +33,17 @@ const incrementCounter = (counters, index) => {
     counters[index] + 1,
     ...counters.slice(index + 1)
   ];
-}
+};
 const testIncrementCounter = () => {
   let listBefore = [1, 3, 6, 2],
       listAfter = [1, 4, 6, 2];
 
   Object.freeze(listBefore);
   expect(incrementCounter(listBefore, 1)).toEqual(listAfter);
-}
+};
 
 testAddCounter();
 testRemoveCounter();
 testIncrementCounter();
-console.log("All Tests passed!")
+
+console.log("All Tests passed!");

@@ -8,7 +8,7 @@ const counter = (state = 0, action) => {
     default:
       return state;
   }
-}
+};
 
 const store = Redux.createStore(counter);
 
@@ -19,8 +19,8 @@ const Counter = (props) => {
       <button onClick={props.onIncrement}>+</button>
       <button onClick={props.onDecrement}>-</button>
     </div>
-  )
-}
+  );
+};
 
 const render = () => {
   ReactDOM.render(
@@ -30,8 +30,8 @@ const render = () => {
         onDecrement={() => store.dispatch({type: "DECREMENT"})}
     />,
     document.getElementById("app")
-  )
-}
+  );
+};
 
 store.subscribe(render);
 render();

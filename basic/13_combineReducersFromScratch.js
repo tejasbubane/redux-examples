@@ -1,4 +1,5 @@
 // Working example: https://jsfiddle.net/dvq57vkn/
+// Run this example from current directory: `node 13_combineReducersFromScratch.js`
 
 const expect = require('expect');
 

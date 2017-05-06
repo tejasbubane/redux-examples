@@ -1,4 +1,7 @@
 // Working Example: https://jsfiddle.net/tejasbubane/kbb939pd/
+// Run this example from current directory: `node 11_reducer_composition_2.js`
+
+const expect = require('expect');
 
 const visibilityFilter = (state = "SHOW_ALL", action) => {
   switch(action.type) {
@@ -20,10 +23,7 @@ const todo = (state, action) => {
       };
     case "TOGGLE_TODO":
       if(state.id === action.id) {
-        return {
-          ...state,
-          completed: !state.completed
-        };
+        return Object.assign({}, state, {completed: !state.completed});
       }
       else {
         return state;
@@ -51,7 +51,7 @@ const todoApp = (state = {}, action) => {
   return {
     todos: todos(state.todos, action),
     visibilityFilter: visibilityFilter(state.visibilityFilter, action)
-  }
+  };
 };
 
 const testAddTodo = () => {
@@ -98,7 +98,7 @@ const testToggleTodo = () => {
   Object.freeze(action);
 
   expect(todoApp(stateBefore, action)).toEqual(stateAfter);
-}
+};
 
 const testVisibilityFilter = () => {
   let stateBefore = {
@@ -114,7 +114,7 @@ const testVisibilityFilter = () => {
   Object.freeze(action);
 
   expect(todoApp(stateBefore, action)).toEqual(stateAfter);
-}
+};
 
 testAddTodo();
 testToggleTodo();

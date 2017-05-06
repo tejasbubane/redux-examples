@@ -1,4 +1,8 @@
 // Working Example: https://jsfiddle.net/tejasbubane/2r8u6pL5/
+// Run this example from current directory: `node 12_combineReducers.js`
+
+const expect = require('expect');
+const Redux = require('redux');
 
 const visibilityFilter = (state = "SHOW_ALL", action) => {
   switch(action.type) {
@@ -20,10 +24,7 @@ const todo = (state, action) => {
       };
     case "TOGGLE_TODO":
       if(state.id === action.id) {
-        return {
-          ...state,
-          completed: !state.completed
-        };
+        return Object.assign({}, state, {completed: !state.completed});
       }
       else {
         return state;
@@ -50,7 +51,7 @@ const todos = (state = [], action) => {
 const todoApp = Redux.combineReducers({
   todos,
   visibilityFilter
-})
+});
 
 const testAddTodo = () => {
   let stateBefore = {

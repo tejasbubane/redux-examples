@@ -1,10 +1,11 @@
 // Working Example: https://jsfiddle.net/tejasbubane/bzx0h9gL/
+// Run this example from current directory: `node 05_reducers_2.js`
+
+const expect = require('expect');
+
 const toggleTodo = (todo) => {
-  return {
-    ...todo,
-    done: !todo.done
-  }
-}
+  return Object.assign({}, todo, {done: !todo.done});
+};
 const testToggleTodo = () => {
   let todoBefore = {
     id: 2,
@@ -15,7 +16,7 @@ const testToggleTodo = () => {
     id: 2,
     text: 'Get the groceries',
     done: true
-  }
+  };
 
   Object.freeze(todoBefore);
   expect(toggleTodo(todoBefore)).toEqual(todoAfter);

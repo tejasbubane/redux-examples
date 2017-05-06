@@ -1,4 +1,8 @@
 // Working Example: https://jsfiddle.net/tejasbubane/0za739oc/
+// Run this example from current directory: `node 06_addTodo_reducer.js`
+
+const expect = require('expect');
+
 const addTodos = (state = [], action) => {
   switch(action.type) {
     case "ADD_TODO":
@@ -9,11 +13,11 @@ const addTodos = (state = [], action) => {
           text: action.text,
           completed: false
         }
-      ]
+      ];
     default:
       return state;
   }
-}
+};
 
 const testAddTodos = () => {
   let beforeState = [],
@@ -33,7 +37,7 @@ const testAddTodos = () => {
   Object.freeze(beforeState);
   Object.freeze(action);
   expect(addTodos(beforeState, action)).toEqual(afterState);
-}
+};
 
 testAddTodos();
 console.log("All Tests Passed!");

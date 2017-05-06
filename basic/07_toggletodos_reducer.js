@@ -1,16 +1,17 @@
 // Working Example: https://jsfiddle.net/tejasbubane/2u6y6c1g/
+// Run this example from current directory: `node 07_toggleTodos_reducer.js`
+
+const expect = require('expect');
+
 const toggleTodos = (state = [], action) => {
   switch(action.type) {
     case "TOGGLE_TODO":
       return state.map(todo => {
         if (todo.id === action.id) {
-          return {
-            ...todo,
-            completed: !todo.completed
-          }
+          return Object.assign({}, todo, {completed: !todo.completed});
         }
         return todo;
-      })
+      });
     default:
       return state;
   }
@@ -31,7 +32,7 @@ const testToggleTodos = () => {
   let action = {
     type: "TOGGLE_TODO",
     id: 1
-  }
+  };
   let afterTodos = [
     {
       id: 0,
