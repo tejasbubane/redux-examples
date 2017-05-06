@@ -1,24 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { combineReducers, createStore } from 'redux';
-import PropTypes from 'prop-types';
+import { Provider } from 'react-redux';
 
 import TodoApp from 'TodoApp';
-
-class Provider extends React.Component {
-  getChildContext() {
-    return {
-      store: this.props.store
-    };
-  }
-
-  render() {
-    return this.props.children;
-  }
-};
-Provider.childContextTypes = {
-  store: PropTypes.object
-};
 
 // Reducers
 import todos from 'todos';
