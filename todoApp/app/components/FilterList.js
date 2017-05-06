@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Link from 'Link';
 
@@ -41,5 +42,5 @@ export default class FilterList extends React.Component {
 }
 
 FilterList.contextTypes = {
-  store: React.PropTypes.object
+  store: PropTypes.object
 };

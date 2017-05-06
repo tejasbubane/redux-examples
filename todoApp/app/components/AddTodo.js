@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default class AddTodo extends React.Component {
   todoCounter = 0;
@@ -23,5 +24,5 @@ export default class AddTodo extends React.Component {
   }
 };
 AddTodo.contextTypes = {
-  store: React.PropTypes.object
+  store: PropTypes.object
 };

@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { combineReducers, createStore } from 'redux';
+import PropTypes from 'prop-types';
 
 import TodoApp from 'TodoApp';
 
@@ -16,7 +17,7 @@ class Provider extends React.Component {
   }
 };
 Provider.childContextTypes = {
-  store: React.PropTypes.object
+  store: PropTypes.object
 };
 
 // Reducers
