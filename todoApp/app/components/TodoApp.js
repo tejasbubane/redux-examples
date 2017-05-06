@@ -4,6 +4,7 @@ import { combineReducers, createStore } from 'redux';
 // Components
 import AddTodo from 'AddTodo';
 import TodoList from 'TodoList';
+import FilterList from 'FilterList';
 
 // Reducers
 import todos from 'todos';
@@ -20,6 +21,7 @@ const TodoApp = () => (
     <h1>TODOs</h1>
     <AddTodo store={store}/>
     <TodoList store={store}/>
+    <FilterList store={store}/>
   </div>
 );
 

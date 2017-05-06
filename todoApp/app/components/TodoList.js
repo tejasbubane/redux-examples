@@ -13,6 +13,17 @@ export default class TodoList extends React.Component {
     this.unsubscribe();
   }
 
+  filteredTodos(todos, visibility) {
+    switch(visibility) {
+    case "COMPLETED":
+      return todos.filter(todo => todo.completed);
+    case "PENDING":
+      return todos.filter(todo => !todo.completed);
+    default:
+      return todos;
+    }
+  }
+
   toggleTodo = (id) => {
     console.log(id);
     this.props.store.dispatch({
@@ -22,12 +33,12 @@ export default class TodoList extends React.Component {
   }
 
   render() {
-    let todos = this.props.store.getState().todos;
+    let { todos, visibility } = this.props.store.getState();
 
     return(
       <ul>
         {
-          todos.map(todo => {
+          this.filteredTodos(todos, visibility).map(todo => {
             return <Todo key={todo.id} todo={todo} onClick={this.toggleTodo}/>;
           })
         }
